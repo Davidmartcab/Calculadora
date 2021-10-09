@@ -43,20 +43,22 @@ public class Calculadora{
 		float num1=0, num2=0, res=0;
 		int conmu = 0;
 		for (int i = 0; i < intro.size(); i++) {
-				if(intro.get(i).equals("*") || intro.get(i).equals("/") || intro.get(i).equals("+") || intro.get(i).equals("-")){
-					if(intro.get(i-1).equals("*") || intro.get(i-1).equals("/") || intro.get(i-1).equals("+") || intro.get(i-1).equals("-")){
-						num1S += "-";
-					}else{
-						operadorA.add(intro.get(i));
-						num2S = num1S;
-						datos.add(num2S);
-						num1S = "";
-					}
-				}else if(intro.get(i).equals(".")){
-					num1S += intro.get(i);
+			if(intro.get(i).equals("*") || intro.get(i).equals("/") || intro.get(i).equals("+") || intro.get(i).equals("-")){
+				if(i == 0 && !intro.get(i).equals("-")){
+					System.out.println("Error: Has introducido " + intro.get(i) + " sin ningún valor delante.");
+				}else if((i == 0 && intro.get(i).equals("-")) || intro.get(i-1).equals("*") || intro.get(i-1).equals("/") || intro.get(i-1).equals("+") || intro.get(i-1).equals("-")){
+					num1S += "-";
 				}else{
-					num1S += intro.get(i);
+					operadorA.add(intro.get(i));
+					num2S = num1S;
+					datos.add(num2S);
+					num1S = "";
 				}
+			}else if(intro.get(i).equals(".")){
+				num1S += intro.get(i);
+			}else{
+				num1S += intro.get(i);
+			}
 		}
 		num2S = num1S;
 		datos.add(num2S);

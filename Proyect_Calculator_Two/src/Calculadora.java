@@ -6,8 +6,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Calculadora{
-	private static String frase = new String();
-	private static String fraseShow = new String();
+	static String frase = new String();
+	static String fraseShow = new String();
+	static String memory = new String();
 
 	private JFrame frame;
 	private JTextField textField;
@@ -306,20 +307,46 @@ public class Calculadora{
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setColumns(10);
+		
+		JButton btnNewButton_7_1 = new JButton("S M");
+		btnNewButton_7_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(Float.toString(calculadora2(frase)));
+				memory = String.valueOf(calculadora2(frase));
+				frase = "";
+				fraseShow = "";
+			}
+		});
+		
+		JButton btnNewButton_7_2 = new JButton("U M");
+		btnNewButton_7_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frase += memory;
+				fraseShow += memory;
+				textField.setText(fraseShow);
+			}
+		});
+		
+		JButton btnNewButton_7_3 = new JButton("R M");
+		btnNewButton_7_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				memory = "";
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(16)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(textField, Alignment.LEADING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(textField)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton_7, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton_8, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
@@ -343,14 +370,22 @@ public class Calculadora{
 								.addComponent(btnNewButton_13, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnNewButton_14, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnNewButton_12, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnNewButton_10, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton_9, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-							.addGap(70)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton_15, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
-					.addContainerGap(70, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(70)
+									.addComponent(btnNewButton_15, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton_7_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton_7_2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton_7_3, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(20, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -387,10 +422,12 @@ public class Calculadora{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNewButton_10)
-						.addComponent(btnNewButton_9))
-					.addContainerGap(133, Short.MAX_VALUE))
+						.addComponent(btnNewButton_9)
+						.addComponent(btnNewButton_7_1)
+						.addComponent(btnNewButton_7_2)
+						.addComponent(btnNewButton_7_3))
+					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-
 }
